@@ -1,0 +1,6 @@
+Create board :: scroll using flex
+create 2 lists link with angular
+create 3 cards in each lists
+add/update/delete list
+add/update/delete card
+card drag n drop

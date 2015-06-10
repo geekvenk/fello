@@ -1,0 +1,40 @@
+body{
+	background-color: #2F70A9;
+	color:#fff;
+}
+.padding-hor-o{
+	padding-left: 0;
+	padding-right: 0;
+}
+.padding-ver-o{
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.padding-o{
+	padding: 0;
+}
+.topbar-holder{
+	padding-top: 10px;
+}
+.logo{
+	display: block;
+	left: 50%;
+	margin-left: -50px;
+	top: 0px;
+	width: 100px;
+	text-align: center;
+	z-index: 2;
+	position: absolute;
+}
+
+.profile-btn{
+	padding-right:5px;
+}
+
+.icon-pad{
+	padding:0 5px;
+}
+
+.cont-holder{
+	padding: 15px 10px;
+}
