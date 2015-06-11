@@ -16,6 +16,11 @@ body{
 .topbar-holder{
 	padding-top: 10px;
 }
+
+.hidden{
+	display: none;
+}
+
 .logo{
 	display: block;
 	left: 50%;
@@ -89,6 +94,11 @@ body{
 	outline: none;
 }
 
+.card-content-holder{
+	width: 100%;
+	position: relative;
+}
+
 .card-title{
 	width:260px;
 	padding: 5px;
@@ -99,6 +109,14 @@ body{
 	width:260px;
 	padding: 5px;
 	margin:5px 5px;
+}
+.card-title input[type="text"]{
+	width:250px;
+	min-width:250px;
+	max-width:250px;
+	padding: 5px;
+	border:none;
+	outline: none;
 }
 
 .cav{
@@ -116,7 +134,6 @@ body{
 
 .card-options{
 	width: 100%;
-	display: none;
 	position: absolute;
 	z-index: 1;
 	margin-left: 180px;
@@ -132,4 +149,8 @@ body{
 }
 .delete-icon:hover{
 	cursor: pointer;
+}
+
+.add-list-button{
+	width: 100%;
 }

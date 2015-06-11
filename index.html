@@ -59,26 +59,47 @@
 	
 	<div class="board">
 		<div class="list-holder" ng-repeat="list in lists">
-			<div class="list" ng-init="addCardIndex[$index]=true">
+			<div class="list">
 			<div class="card-title">
-				{{list.name}} {{addCardIndex[$index]}}
+				<div class="card-content-holder" ng-show="editListIndex[$index]" ng-mouseover="cardTitleHover[$index]=false" ng-mouseleave="cardTitleHover[$index]=true">
+				<div class="card-options" ng-hide="cardTitleHover[$index]">
+				<i class="glyphicon glyphicon-pencil icon-pad edit-icon" ng-click="editListIndex[$index]=false;editList[$index]=list.name"></i>&nbsp;<i class="glyphicon glyphicon-trash icon-pad delete-icon" ng-click="deleteList($index)"></i>
+				</div>
+					<span ng-show="editListIndex[$index]">
+						{{list.name}}
+					</span>
+				</div>
 			</div>
+			<div class="card-title" ng-hide="editListIndex[$index]">
+				<input type="text" ng-model="editList[$index]">
+			</div>
+			<div class="card-add" ng-hide="editListIndex[$index]">
+					<button type="submit" class="btn btn-primary" 
+					ng-click="saveList($index,editList[$index])">
+  					<i class="glyphicon glyphicon-plus"></i> Save
+					</button>
+					<button class="btn btn-primary"
+					ng-click="cancelSaveList($index)">
+  					<i class="glyphicon glyphicon-remove"></i>
+					</button>
+			</div>
+
 			<div class="cards-scrollable" id="{{list.id}}">
 			<div class="card card-{{list.id}}" ng-repeat="card in list.cards">
-				<div ng-mouseover="cardHoverIn('.'+$parent.$index+'cardHover'+$index)" ng-mouseleave="cardHoverOut('.'+$parent.$index+'cardHover'+$index)" ng-init="editCardIndex[$parent.$index][$index]=true">
-				<div class="card-options {{$parent.$index}}cardHover{{$index}}">
+				<div class="card-content-holder" ng-mouseover="cardHover[$parent.$index][$index]=false" ng-mouseleave="cardHover[$parent.$index][$index]=true">
+				<div class="card-options {{$parent.$index}}cardHover{{$index}}" ng-hide="cardHover[$parent.$index][$index]">
 				<i class="glyphicon glyphicon-pencil icon-pad edit-icon" ng-click="editCard($parent.$index,$index)"></i>&nbsp;<i class="glyphicon glyphicon-trash icon-pad delete-icon" ng-click="deleteCard($parent.$index,$index)"></i>
 				</div>
-					<span ng-show="editCardIndex[$parent.$index][$index]" id="{{$parent.$index}}cardContent{{$index}}" ng-init="editCardContent[$parent.$index][$index]=card.content">
+					<span ng-show="editCardIndex[$parent.$index][$index]" id="{{$parent.$index}}cardContent{{$index}}">
 						{{card.content}}
 					</span>
 				</div>
-				<div ng-hide="editCardIndex[$parent.$index][$index]" >
+				<div class="" ng-hide="editCardIndex[$parent.$index][$index]" >
 				<textarea type="text" ng-model="editCardContent[$parent.$index][$index]" /></textarea>
 				</div>
 				<div class="card-add" ng-hide="editCardIndex[$parent.$index][$index]">
 					<button type="submit" class="btn btn-primary" ng-click="saveCard($parent.$index,$index)">
-  					<i class="glyphicon glyphicon-plus"></i> Save
+  					<i class="glyphicon glyphicon-floppy-disk"></i> Save
 					</button>
 					<button class="btn btn-primary" ng-click="cancelEditCard($parent.$index,$index)">
   					<i class="glyphicon glyphicon-remove"></i>
@@ -105,10 +126,30 @@
 				</button>
 			</div>
 
-			<div>
+			</div>
+		</div>
+		<div class="list-holder">
+			<div class="list add-list">
+			<div class="card-title" ng-show="newListBool">
+			<button type="submit" class="btn btn-primary add-list-button" ng-click="addNewListUI()">
+  			<i class="glyphicon glyphicon-plus"></i> New List {{newList}} {{newListBool}}
+			</button>
+			</div>
+			
+			<div class="card-title" ng-hide="newListBool">
+				<input type="text" ng-model="newList">
+			</div>
+			<div class="card-add " ng-hide="newListBool">
+				<button type="submit" class="btn btn-primary" ng-click="addList(newList)">
+  				<i class="glyphicon glyphicon-plus"></i> Create
+				</button>
+				<button class="btn btn-primary" ng-click="cancelList()">
+  				<i class="glyphicon glyphicon-remove"></i> Cancel
+				</button>
+			</div>
+			</div>
 		</div>
 	</div>
-
 	</div>
 
 
