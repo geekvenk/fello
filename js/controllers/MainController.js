@@ -1,89 +1,7 @@
 app.controller('MainController', ['$scope', function($scope) { 
   $scope.title = "Venkatesh's board";
-  $scope.lists = [
-  	{ 
-    	id:'1',
-      name: 'Animals', 
-    	pubdate: new Date('2015', '03', '08'),
-      cards:[{ 
-      cardid:'1',
-      content: 'Includes over 250 glyphs in font format from the Glyphicon Halflings set.', 
-      pubdate: new Date('2015', '03', '08')
-      }, 
-      { 
-      cardid:'2',
-      content: 'Glyphicons Halflings are normally not available for free',
-      pubdate: new Date('2015', '08', '01')
-      }, 
-      { 
-      cardid:'3',
-      content: 'Includes over 250 glyphs in font format from the Glyphicon Halflings set.',
-      pubdate: new Date('2015', '08', '01')
-      }, 
-      { 
-      cardid:'4',
-      content: 'Glyphicons Halflings are normally not available for free',
-      pubdate: new Date('2015', '08', '01')
-      }, 
-      { 
-      cardid:'5',
-      content: 'Includes over 250 glyphs in font format from the Glyphicon Halflings set.',
-      pubdate: new Date('2015', '08', '01')
-      }]
-  	}, 
-  	{ 
-      id:'2',
-    	name: 'Cars',
-    	pubdate: new Date('2015', '08', '01'),
-      cards:[{ 
-      cardid:'1',
-      content: 'Includes over 250 glyphs in font format from the Glyphicon Halflings set.', 
-      pubdate: new Date('2015', '03', '08')
-      }, 
-      { 
-      cardid:'2',
-      content: 'Glyphicons Halflings are normally not available for free',
-      pubdate: new Date('2015', '08', '01')
-      }]
-  	}, 
-  	{ 
-      id:'3',
-    	name: 'Countries',
-    	pubdate: new Date('2015', '07', '08'),
-      cards:[{ 
-      cardid:'1',
-      content: 'Includes over 250 glyphs in font format from the Glyphicon Halflings set.', 
-      pubdate: new Date('2015', '03', '08')
-      }, 
-      { 
-      cardid:'2',
-      content: 'Glyphicons Halflings are normally not available for free',
-      pubdate: new Date('2015', '08', '01')
-      },
-      { 
-      cardid:'1',
-      content: 'Includes over 250 glyphs in font format from the Glyphicon Halflings set.', 
-      pubdate: new Date('2015', '03', '08')
-      }]
-  	}, 
-  	{ 
-      id:'4',
-    	name: 'Oceans',
-    	pubdate: new Date('2015', '08', '16'),
-      cards:[{ 
-      cardid:'1',
-      content: 'Includes over 250 glyphs in font format from the Glyphicon Halflings set.', 
-      pubdate: new Date('2015', '03', '08')
-      }, 
-      { 
-      cardid:'2',
-      content: 'Glyphicons Halflings are normally not available for free',
-      pubdate: new Date('2015', '08', '01')
-      }]
-  	}
-  ];
-    var i,ii;
-    var tempList;
+  $scope.lists = JSON.parse(localStorage.getItem("lists"));
+    var i,ii,tempList;
     $scope.newList='';
     $scope.newListBool=true;
     $scope.newCardContent=new Array();
@@ -136,11 +54,13 @@ app.controller('MainController', ['$scope', function($scope) {
       $scope.editCardIndex[parentIndex][index]=true;
       console.log("Saved ->"+$scope.editCardContent);
       console.log("Hover Out card ->"+index);
+      localStorage.setItem("lists", JSON.stringify($scope.lists));
     };
 
     $scope.deleteCard = function(parentIndex,index) {
       $scope.lists[parentIndex].cards.splice(index, 1);
       console.log("Card Deleted->"+index);
+      localStorage.setItem("lists", JSON.stringify($scope.lists));
     };
 
     $scope.addCardProcess = function(index) { 
@@ -165,6 +85,7 @@ app.controller('MainController', ['$scope', function($scope) {
 
     $scope.newCardContent[index]="";
     $scope.addCardIndex[index]=true;
+    localStorage.setItem("lists", JSON.stringify($scope.lists));
     };
 
     $scope.addList = function(name) { 
@@ -186,7 +107,9 @@ app.controller('MainController', ['$scope', function($scope) {
     console.log("Added Card -> "+tempList.name);
     $scope.newList="";
     $scope.newListBool=true;
+    localStorage.setItem("lists", JSON.stringify($scope.lists));
     $scope.initiate();
+
     };
 
     $scope.addNewListUI = function() { 
@@ -200,6 +123,7 @@ app.controller('MainController', ['$scope', function($scope) {
     console.log("indexbool "+$scope.editListIndex[index]);
     $scope.editListIndex[index]=true;
     $scope.editList[index]='';
+    localStorage.setItem("lists", JSON.stringify($scope.lists));
     $scope.initiate();
     };
 
@@ -213,6 +137,7 @@ app.controller('MainController', ['$scope', function($scope) {
 
     $scope.deleteList = function(index) {
       $scope.lists.splice(index, 1);
+      localStorage.setItem("lists", JSON.stringify($scope.lists));
       $scope.initiate();
       console.log("List Deleted->"+index);
     };
