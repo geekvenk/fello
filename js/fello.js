@@ -21,7 +21,7 @@ function cusize(){
 
 	bl.forEach(function(entry) {
 
-    console.log(entry);
+    //console.log(entry);
     cardid=".card-"+entry;
     
     if ($('#'+entry).hasScrollBar()) {

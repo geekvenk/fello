@@ -81,6 +81,14 @@ body{
 	border-radius: 3px;
 	border-bottom: 1px solid #CDCCCC;
 }
+.card textarea{
+	width:250px;
+	min-width:250px;
+	max-width:250px;
+	border:none;
+	outline: none;
+}
+
 .card-title{
 	width:260px;
 	padding: 5px;
@@ -91,4 +99,37 @@ body{
 	width:260px;
 	padding: 5px;
 	margin:5px 5px;
+}
+
+.cav{
+	display: block;
+}
+.cav:hover{
+	cursor: pointer;
+	display: block;
+	text-decoration: underline;
+}
+
+.cah{
+	display: none;
+}
+
+.card-options{
+	width: 100%;
+	display: none;
+	position: absolute;
+	z-index: 1;
+	margin-left: 180px;
+	opacity: 0.8;
+	width:80px;
+	padding: 5px;
+	background: #DDDDDD;
+
+}
+
+.edit-icon:hover{
+	cursor: pointer;
+}
+.delete-icon:hover{
+	cursor: pointer;
 }
