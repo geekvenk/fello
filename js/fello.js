@@ -20,10 +20,7 @@ function cusize(){
 	$(".board").css("height",boardHeight);
 
 	bl.forEach(function(entry) {
-
-    //console.log(entry);
     cardid=".card-"+entry;
-    
     if ($('#'+entry).hasScrollBar()) {
     	$(cardid).css("width","245px");
     }else{
@@ -40,3 +37,17 @@ $(window).resize(function() {
 });
 
 });
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}

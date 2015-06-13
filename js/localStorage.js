@@ -87,5 +87,5 @@
   if (typeof(Storage) != "undefined") {
     localStorage.setItem("lists", JSON.stringify(iniList));
 } else {
-    alert("Brrrrrrrrrrrrrrrrr");
+    alert("localStorage is not available!");
 }

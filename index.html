@@ -84,9 +84,9 @@
 					</button>
 			</div>
 
-			<div class="cards-scrollable" id="{{list.id}}">
-			<div class="card card-{{list.id}}" ng-repeat="card in list.cards">
-				<div class="card-content-holder" ng-mouseover="cardHover[$parent.$index][$index]=false" ng-mouseleave="cardHover[$parent.$index][$index]=true">
+			<div class="cards-scrollable" id="{{list.id}}"  ondrop="drop(event)" ondragover="allowDrop(event)" >
+			<div class="card card-{{list.id}}" id="card-{{list.id}}" ng-repeat="card in list.cards" draggable="true" droppable="false" ondragstart="drag(event)" >
+				<div class="card-content-holder" ng-mouseover="cardHover[$parent.$index][$index]=false" ng-mouseleave="cardHover[$parent.$index][$index]=true" >
 				<div class="card-options {{$parent.$index}}cardHover{{$index}}" ng-hide="cardHover[$parent.$index][$index]">
 				<i class="glyphicon glyphicon-pencil icon-pad edit-icon" ng-click="editCard($parent.$index,$index)"></i>&nbsp;<i class="glyphicon glyphicon-trash icon-pad delete-icon" ng-click="deleteCard($parent.$index,$index)"></i>
 				</div>

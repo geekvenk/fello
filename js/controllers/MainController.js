@@ -13,8 +13,6 @@ app.controller('MainController', ['$scope', function($scope) {
     $scope.cardTitleHover=new Array();
     $scope.editListContent=new Array();
     $scope.cardHover=new Array();
-    $scope.currentAddCardClass='.addCard0';
-    $scope.hiddenAddCardHiddenClass='.addCardHidden0';
 
     $scope.initiate=function(){
       i=0;
@@ -81,10 +79,14 @@ app.controller('MainController', ['$scope', function($scope) {
       pubdate: new Date('2015', '03', '08')
     };
     $scope.lists[index].cards.push(newCard); 
-    console.log("Card added ->"+newCard.cardid);
+    newCardIndex=$scope.lists[index].cards.length-1;
 
+    console.log("Card added ->"+newCard.cardid);
     $scope.newCardContent[index]="";
     $scope.addCardIndex[index]=true;
+    $scope.editCardIndex[index][newCardIndex]=true;
+    $scope.cardHover[index][newCardIndex]=true;
+    console.log("Numbet of cards ->"+newCardIndex);
     localStorage.setItem("lists", JSON.stringify($scope.lists));
     };
 
@@ -141,6 +143,8 @@ app.controller('MainController', ['$scope', function($scope) {
       $scope.initiate();
       console.log("List Deleted->"+index);
     };
+
+
 
 
 
