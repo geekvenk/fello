@@ -1,1 +1,1 @@
-var app = angular.module("fello", []);
+var app = angular.module("fello", ['ui.sortable']);

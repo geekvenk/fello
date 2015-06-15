@@ -13,6 +13,7 @@ app.controller('MainController', ['$scope', function($scope) {
     $scope.cardTitleHover=new Array();
     $scope.editListContent=new Array();
     $scope.cardHover=new Array();
+    $scope.sortableOptionsList=new Array();
 
     $scope.initiate=function(){
       i=0;
@@ -39,6 +40,10 @@ app.controller('MainController', ['$scope', function($scope) {
     $scope.initiate();
     $scope.editCard = function(parentIndex,index) {
       $scope.editCardIndex[parentIndex][index]=false;
+      $scope.cardHover[parentIndex][index]=true;
+      var id="#editCardContent"+parentIndex+''+index;
+      setTimeout(function(){$(id).focus();$(id).select();},0);
+      console.log("Textarea ID ->"+id);
       console.log("editCardContent ->"+$scope.editCardIndex[parentIndex][index]);
       console.log("Hover Out card ->"+index);
     };
@@ -62,7 +67,6 @@ app.controller('MainController', ['$scope', function($scope) {
     };
 
     $scope.addCardProcess = function(index) { 
-
     $scope.addCardIndex[index]=false;
     console.log("Card adding...");
     };
@@ -145,6 +149,74 @@ app.controller('MainController', ['$scope', function($scope) {
     };
 
 
+  var tmpList = [];
+  $scope.sortingLog = [];
+  
+  function createOptions (listName) {
+    var _listName = listName;
+    var options = {
+      placeholder: "card",
+      connectWith: ".cards-scrollable",
+      activate: function() {
+          console.log("list " + _listName + ": activate");
+      },
+      beforeStop: function() {
+          console.log("list " + _listName + ": beforeStop");
+      },
+      change: function() {
+          console.log("list " + _listName + ": change");
+      },
+      create: function() {
+          console.log("list " + _listName + ": create");
+      },
+      deactivate: function() {
+          console.log("list " + _listName + ": deactivate");
+      },
+      out: function() {
+          console.log("list " + _listName + ": out");
+      },
+      over: function() {
+          console.log("list " + _listName + ": over");
+      },
+      receive: function() {
+          console.log("list " + _listName + ": receive");
+      },
+      remove: function() {
+          console.log("list " + _listName + ": remove");
+      },
+      sort: function() {
+          console.log("list " + _listName + ": sort");
+      },
+      start: function() {
+          console.log("list " + _listName + ": start");
+      },
+      stop: function() {
+          console.log("list " + _listName + ": stop");
+      },
+      update: function() {
+          console.log("list " + _listName + ": update");
+          $scope.initiate();
+      }
+    };
+    return options;
+  }
+
+    for (ii = 0; ii < $scope.lists.length; ii++) {
+      $scope.sortableOptionsList.push(createOptions($scope.lists[ii].name));
+    }
+  
+  $scope.logModels = function () {
+    $scope.sortingLog = [];
+    for (var ii = 0; ii < $scope.lists.length; ii++) {
+    for (var i = 0; i < $scope.lists[ii].cards.length; i++) {
+      var logEntry = $scope.lists[ii].cards[i].map(function (x) {
+        return x.title;
+      }).join(', ');
+      logEntry = 'container ' + (i+1) + ': ' + logEntry;
+      $scope.sortingLog.push(logEntry);
+    }
+    }
+  };
 
 
 

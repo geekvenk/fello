@@ -84,47 +84,51 @@
 					</button>
 			</div>
 
-			<div class="cards-scrollable" id="{{list.id}}"  ondrop="drop(event)" ondragover="allowDrop(event)" >
-			<div class="card card-{{list.id}}" id="card-{{list.id}}" ng-repeat="card in list.cards" draggable="true" droppable="false" ondragstart="drag(event)" >
+			<div class="cards-scrollable" id="{{list.id}}" ui-sortable="sortableOptionsList[$index]" ng-model="lists[$index].cards">
+			<div class="card card-{{list.id}}" id="card-{{list.id}}" ng-repeat="card in lists[$index].cards">
 				<div class="card-content-holder" ng-mouseover="cardHover[$parent.$index][$index]=false" ng-mouseleave="cardHover[$parent.$index][$index]=true" >
-				<div class="card-options {{$parent.$index}}cardHover{{$index}}" ng-hide="cardHover[$parent.$index][$index]">
-				<i class="glyphicon glyphicon-pencil icon-pad edit-icon" ng-click="editCard($parent.$index,$index)"></i>&nbsp;<i class="glyphicon glyphicon-trash icon-pad delete-icon" ng-click="deleteCard($parent.$index,$index)"></i>
-				</div>
-					<span ng-show="editCardIndex[$parent.$index][$index]" id="{{$parent.$index}}cardContent{{$index}}">
+					<div class="card-options {{$parent.$index}}cardHover{{$index}}" ng-hide="cardHover[$parent.$index][$index]">
+						<i class="glyphicon glyphicon-pencil icon-pad edit-icon" ng-click="editCard($parent.$index,$index)"></i>&nbsp;<i class="glyphicon glyphicon-trash icon-pad delete-icon" ng-click="deleteCard($parent.$index,$index)"></i>
+					</div>
+					<span class="card-content" ng-show="editCardIndex[$parent.$index][$index]" id="{{$parent.$index}}cardContent{{$index}}">
 						{{card.content}}
 					</span>
 				</div>
 				<div class="" ng-hide="editCardIndex[$parent.$index][$index]" >
-				<textarea type="text" ng-model="editCardContent[$parent.$index][$index]" /></textarea>
+					<textarea type="text" ng-model="editCardContent[$parent.$index][$index]" id="editCardContent{{$parent.$index}}{{$index}}" /></textarea>
 				</div>
 				<div class="card-add" ng-hide="editCardIndex[$parent.$index][$index]">
 					<button type="submit" class="btn btn-primary" ng-click="saveCard($parent.$index,$index)">
-  					<i class="glyphicon glyphicon-floppy-disk"></i> Save
+  						<i class="glyphicon glyphicon-floppy-disk"></i> Save
 					</button>
 					<button class="btn btn-primary" ng-click="cancelEditCard($parent.$index,$index)">
-  					<i class="glyphicon glyphicon-remove"></i>
+  						<i class="glyphicon glyphicon-remove"></i>
 					</button>
 				</div>
 			</div>
-			
-			</div>
-			
-			<div class="card-add cav" ng-click="addCardProcess($index)" ng-show="addCardIndex[$index]">
-				Add card...
-			</div>
 
-			<div class="card " ng-hide="addCardIndex[$index]">
+			<div class="card card-{{list.id}}" id="card-{{list.id}}" ng-hide="addCardIndex[$index]">
 				<textarea type="text" ng-model="newCardContent[$index]" /></textarea>
 			</div>
 
-			<div class="card-add " ng-hide="addCardIndex[$index]">
-				<button type="submit" class="btn btn-primary" ng-click="addCard($index,newCardContent[$index])">
+			
+			
+			</div>
+
+			<div class="card-add " ng-hide="addCardIndex[$index]" onclick="scrollBot($index)">
+				<button type="submit" class="btn btn-primary" ng-click="addCard($index,newCardContent[$index]);">
   				<i class="glyphicon glyphicon-plus"></i> Add
 				</button>
 				<button class="btn btn-primary" ng-click="cancelAdd($index)">
   				<i class="glyphicon glyphicon-remove"></i>
 				</button>
 			</div>
+			
+			<div class="card-add cav card-add-active" ng-click="addCardProcess($index)" ng-show="addCardIndex[$index]">
+				Add card...
+			</div>
+
+			
 
 			</div>
 		</div>
@@ -158,6 +162,8 @@
 	<script src="/js/localstorage.js"></script>
 	<script src="/js/angular.1-3-16.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery-ui.js"></script>
+	<script src="/js/sortable.js"></script>
 	<script src="/js/fello.js"></script>
 	<script src="/js/app.js"></script>
 	<script src="/js/controllers/MainController.js"></script>
