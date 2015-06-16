@@ -33,7 +33,7 @@ app.controller('MainController', ['$scope', function($scope) {
       var id="#editCardContent"+parentIndex+''+index;
       var idValueLength=$(id).val().length;
       console.log("Length ->"+idValueLength);
-      var idNumLines=Math.round(idValueLength/35);idNumLines++;
+      var idNumLines=Math.round(idValueLength/35);idNumLines+=2;
       var idHeight=idNumLines*25;
       $(id).css('height',idHeight+"px");
     };
@@ -90,17 +90,17 @@ app.controller('MainController', ['$scope', function($scope) {
       $scope.editCardIndex[parentIndex][index]=true;
       console.log("Saved ->"+$scope.editCardContent);
       console.log("Hover Out card ->"+index);
-      localStorage.setItem("lists", JSON.stringify($scope.lists));
       $scope.prevCardEdit=false;
       $scope.lightbox=false;
       id="#cardEditPanel"+parentIndex+''+index;
       $(id).css({"position":"inherit","z-index":"0"});
+      $scope.initiate();
     };
 
     $scope.deleteCard = function(parentIndex,index) {
       $scope.lists[parentIndex].cards.splice(index, 1);
       console.log("Card Deleted->"+index);
-      localStorage.setItem("lists", JSON.stringify($scope.lists));
+      $scope.initiate();
     };
 
     $scope.addCardProcess = function(index) {
@@ -128,7 +128,7 @@ app.controller('MainController', ['$scope', function($scope) {
     $scope.editCardIndex[index][newCardIndex]=true;
     $scope.cardHover[index][newCardIndex]=true;
     console.log("Numbet of cards ->"+newCardIndex);
-    localStorage.setItem("lists", JSON.stringify($scope.lists));
+    $scope.initiate();
     };
 
     $scope.addList = function(name) { 
@@ -264,7 +264,5 @@ app.controller('MainController', ['$scope', function($scope) {
     }
     }
   };
-
-
 
 }]);
