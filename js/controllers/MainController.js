@@ -1,19 +1,7 @@
 app.controller('MainController', ['$scope', function($scope) { 
   $scope.title = "Venkatesh's board";
   $scope.lists = JSON.parse(localStorage.getItem("lists"));
-    var i,ii,tempList;
-    $scope.newList='';
-    $scope.newListBool=true;
-    $scope.newCardContent=new Array();
-    $scope.addCardIndex=new Array();
-    $scope.editCardContent=new Array();
-    $scope.editCardIndex=new Array();
-    $scope.editList=new Array();
-    $scope.editListIndex=new Array();
-    $scope.cardTitleHover=new Array();
-    $scope.editListContent=new Array();
-    $scope.cardHover=new Array();
-    $scope.sortableOptionsList=new Array();
+    var i,ii,tempList;$scope.newList='';$scope.newListBool=true;$scope.newCardContent=new Array();$scope.addCardIndex=new Array();$scope.editCardContent=new Array();$scope.editCardIndex=new Array();$scope.editList=new Array();$scope.editListIndex=new Array();$scope.cardTitleHover=new Array();$scope.editListContent=new Array();$scope.cardHover=new Array();$scope.sortableOptionsList=new Array();
 
     $scope.initiate=function(){
       i=0;
@@ -121,6 +109,15 @@ app.controller('MainController', ['$scope', function($scope) {
     $scope.addNewListUI = function() { 
     $scope.newListBool=false;
     };
+
+    $scope.editListUI = function(index) { 
+    $scope.editListIndex[index]=false;
+    $scope.editList[index]=$scope.lists[index].name;
+    var id="#title-"+index;
+    setTimeout(function(){$(id).focus();$(id).select();},0);
+    console.log("indexbool "+$scope.editListIndex[index]);
+    };
+    
 
     $scope.saveList = function(index,conten) { 
     console.log("Save index "+index+"\n"+"conten "+conten);

@@ -63,7 +63,7 @@
 			<div class="card-title">
 				<div class="card-content-holder" ng-show="editListIndex[$index]" ng-mouseover="cardTitleHover[$index]=false" ng-mouseleave="cardTitleHover[$index]=true">
 				<div class="card-options" ng-hide="cardTitleHover[$index]">
-				<i class="glyphicon glyphicon-pencil icon-pad edit-icon" ng-click="editListIndex[$index]=false;editList[$index]=list.name"></i>&nbsp;<i class="glyphicon glyphicon-trash icon-pad delete-icon" ng-click="deleteList($index)"></i>
+				<i class="glyphicon glyphicon-pencil icon-pad edit-icon" ng-click="editListUI($index);"></i>&nbsp;<i class="glyphicon glyphicon-trash icon-pad delete-icon" ng-click="deleteList($index)"></i>
 				</div>
 					<span ng-show="editListIndex[$index]">
 						{{list.name}}
@@ -71,7 +71,7 @@
 				</div>
 			</div>
 			<div class="card-title" ng-hide="editListIndex[$index]">
-				<input type="text" ng-model="editList[$index]">
+				<input type="text" id="title-{{$index}}" ng-model="editList[$index]">
 			</div>
 			<div class="card-add" ng-hide="editListIndex[$index]">
 					<button type="submit" class="btn btn-primary" 
