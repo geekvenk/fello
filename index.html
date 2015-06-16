@@ -95,7 +95,7 @@
 					</span>
 				</div>
 				<div class="" ng-hide="editCardIndex[$parent.$index][$index]" >
-					<textarea type="text" ng-model="editCardContent[$parent.$index][$index]" id="editCardContent{{$parent.$index}}{{$index}}" /></textarea>
+					<textarea type="text" ng-model="editCardContent[$parent.$index][$index]" id="editCardContent{{$parent.$index}}{{$index}}" ng-change="onCardInput($parent.$index,$index)"/></textarea>
 				</div>
 				<div class="card-add" ng-hide="editCardIndex[$parent.$index][$index]">
 					<button type="submit" class="btn btn-primary" ng-click="saveCard($parent.$index,$index)">

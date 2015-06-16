@@ -26,10 +26,22 @@ app.controller('MainController', ['$scope', function($scope) {
     };
 
     $scope.initiate();
+
+    $scope.onCardInput=function(parentIndex,index){
+      var id="#editCardContent"+parentIndex+''+index;
+      var idValueLength=$(id).val().length;
+      console.log("Length ->"+idValueLength);
+      var idNumLines=Math.round(idValueLength/40);idNumLines++;
+      var idHeight=idNumLines*25;
+      $(id).css('height',idHeight+"px");
+    };
+
+
     $scope.editCard = function(parentIndex,index) {
       $scope.editCardIndex[parentIndex][index]=false;
       $scope.cardHover[parentIndex][index]=true;
       var id="#editCardContent"+parentIndex+''+index;
+      $scope.onCardInput(parentIndex,index);
       setTimeout(function(){$(id).focus();$(id).select();},0);
       console.log("Textarea ID ->"+id);
       console.log("editCardContent ->"+$scope.editCardIndex[parentIndex][index]);
