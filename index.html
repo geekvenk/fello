@@ -7,7 +7,7 @@
 <title>{{title}}</title>
 </head>
 <body>
-
+<div class="cardEditPanelBG" ng-show="lightbox" ng-click="cancelEdit()"></div>
 <nav class="navbar navbar-default">
 <div class="container-fluid ">
 
@@ -74,7 +74,7 @@
 				<input type="text" id="title-{{$index}}" ng-model="editList[$index]">
 			</div>
 			<div class="card-add" ng-hide="editListIndex[$index]">
-					<button type="submit" class="btn btn-primary" 
+					<button type="submit" class="btn btn-success" 
 					ng-click="saveList($index,editList[$index])">
   					<i class="glyphicon glyphicon-plus"></i> Save
 					</button>
@@ -85,7 +85,7 @@
 			</div>
 
 			<div class="cards-scrollable" id="{{list.id}}" ui-sortable="sortableOptionsList[$index]" ng-model="lists[$index].cards">
-			<div class="card card-{{list.id}}" id="card-{{list.id}}" ng-repeat="card in lists[$index].cards">
+			<div class="card card-{{list.id}}" ng-repeat="card in lists[$index].cards">
 				<div class="card-content-holder" ng-mouseover="cardHover[$parent.$index][$index]=false" ng-mouseleave="cardHover[$parent.$index][$index]=true" >
 					<div class="card-options {{$parent.$index}}cardHover{{$index}}" ng-hide="cardHover[$parent.$index][$index]">
 						<i class="glyphicon glyphicon-pencil icon-pad edit-icon" ng-click="editCard($parent.$index,$index)"></i>&nbsp;<i class="glyphicon glyphicon-trash icon-pad delete-icon" ng-click="deleteCard($parent.$index,$index)"></i>
@@ -94,16 +94,18 @@
 						{{card.content}}
 					</span>
 				</div>
-				<div class="" ng-hide="editCardIndex[$parent.$index][$index]" >
+				<div id="cardEditPanel{{$parent.$index}}{{$index}}" ng-hide="editCardIndex[$parent.$index][$index]">
+				<div class=""  >
 					<textarea type="text" ng-model="editCardContent[$parent.$index][$index]" id="editCardContent{{$parent.$index}}{{$index}}" ng-change="onCardInput($parent.$index,$index)"/></textarea>
 				</div>
-				<div class="card-add" ng-hide="editCardIndex[$parent.$index][$index]">
-					<button type="submit" class="btn btn-primary" ng-click="saveCard($parent.$index,$index)">
+				<div class="card-add">
+					<button type="submit" class="btn btn-success" ng-click="saveCard($parent.$index,$index)">
   						<i class="glyphicon glyphicon-floppy-disk"></i> Save
 					</button>
 					<button class="btn btn-primary" ng-click="cancelEditCard($parent.$index,$index)">
   						<i class="glyphicon glyphicon-remove"></i>
 					</button>
+				</div>
 				</div>
 			</div>
 

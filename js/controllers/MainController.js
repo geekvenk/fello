@@ -1,7 +1,7 @@
 app.controller('MainController', ['$scope', function($scope) { 
   $scope.title = "Venkatesh's board";
   $scope.lists = JSON.parse(localStorage.getItem("lists"));
-    var i,ii,tempList;$scope.newList='';$scope.newListBool=true;$scope.prevCardEdit=false;$scope.newCardContent=new Array();$scope.addCardIndex=new Array();$scope.editCardContent=new Array();$scope.editCardIndex=new Array();$scope.editList=new Array();$scope.editListIndex=new Array();$scope.cardTitleHover=new Array();$scope.editListContent=new Array();$scope.cardHover=new Array();$scope.sortableOptionsList=new Array();$scope.prevEditCardId=new Array();
+    var i,ii,tempList;$scope.newList='';$scope.newListBool=true;$scope.lightbox=false;$scope.prevCardEdit=false;$scope.newCardContent=new Array();$scope.addCardIndex=new Array();$scope.editCardContent=new Array();$scope.editCardIndex=new Array();$scope.editList=new Array();$scope.editListIndex=new Array();$scope.cardTitleHover=new Array();$scope.editListContent=new Array();$scope.cardHover=new Array();$scope.sortableOptionsList=new Array();$scope.prevEditCardId=new Array();
 
     $scope.initiate=function(){
       i=0;
@@ -31,7 +31,7 @@ app.controller('MainController', ['$scope', function($scope) {
       var id="#editCardContent"+parentIndex+''+index;
       var idValueLength=$(id).val().length;
       console.log("Length ->"+idValueLength);
-      var idNumLines=Math.round(idValueLength/40);idNumLines++;
+      var idNumLines=Math.round(idValueLength/35);idNumLines++;
       var idHeight=idNumLines*25;
       $(id).css('height',idHeight+"px");
     };
@@ -51,11 +51,27 @@ app.controller('MainController', ['$scope', function($scope) {
       console.log("Textarea ID ->"+id);
       console.log("editCardContent ->"+$scope.editCardIndex[parentIndex][index]);
       console.log("Hover Out card ->"+index);
+      $scope.lightbox=true;
+      var idd="#editCardContent"+parentIndex+''+index;
+      $(idd).css({"position":"relative","z-index":"2","padding":"8px","border-radius":"3px"});
+      idd="#cardEditPanel"+parentIndex+''+index;
+      $(idd).css({"position":"relative","z-index":"2"});
+     };
+
+    $scope.cancelEdit = function() {
+      $scope.editCardIndex[$scope.prevEditCardId[0]][$scope.prevEditCardId[1]]=true;
+      $scope.prevCardEdit=false;
+      $scope.lightbox=false;
+      id="#cardEditPanel"+$scope.prevEditCardId[0]+''+$scope.prevEditCardId[1];
+      $(id).css({"position":"inherit","z-index":"0"});
     };
 
     $scope.cancelEditCard = function(parentIndex,index) {
       $scope.editCardIndex[parentIndex][index]=true;
       $scope.prevCardEdit=false;
+      $scope.lightbox=false;
+      id="#cardEditPanel"+parentIndex+''+index;
+      $(id).css({"position":"inherit","z-index":"0"});
     };
 
     $scope.saveCard = function(parentIndex,index) {
@@ -65,6 +81,9 @@ app.controller('MainController', ['$scope', function($scope) {
       console.log("Hover Out card ->"+index);
       localStorage.setItem("lists", JSON.stringify($scope.lists));
       $scope.prevCardEdit=false;
+      $scope.lightbox=false;
+      id="#cardEditPanel"+parentIndex+''+index;
+      $(id).css({"position":"inherit","z-index":"0"});
     };
 
     $scope.deleteCard = function(parentIndex,index) {

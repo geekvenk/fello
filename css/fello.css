@@ -153,7 +153,7 @@ body{
 }
 
 .card-options{
-	  width: 70px;
+	 width: 70px;
   position: absolute;
   z-index: 1;
   margin: -5px 0px 0px 185px;
@@ -166,6 +166,16 @@ body{
 }
 .card-options i:hover{
 	text-shadow: 0px 0px 1px #8E8E8E;
+}
+
+.cardEditPanelBG{
+	width: 100%;
+	height: 100%;
+	display: block;
+  	position: absolute;
+  	z-index: 1;
+  	opacity: 0.7;
+  	background-color: #000000;
 }
 
 .edit-icon:hover{
