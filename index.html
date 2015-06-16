@@ -86,7 +86,7 @@
 
 			<div class="cards-scrollable" id="{{list.id}}" ui-sortable="sortableOptionsList[$index]" ng-model="lists[$index].cards">
 			<div class="card card-{{list.id}}" ng-repeat="card in lists[$index].cards">
-				<div class="card-content-holder" ng-mouseover="cardHover[$parent.$index][$index]=false" ng-mouseleave="cardHover[$parent.$index][$index]=true" >
+				<div class="card-content-holder" ng-mouseover="cardHover[$parent.$index][$index]=false" ng-mouseleave="cardHover[$parent.$index][$index]=true" ng-click="editCard($parent.$index,$index)">
 					<div class="card-options {{$parent.$index}}cardHover{{$index}}" ng-hide="cardHover[$parent.$index][$index]">
 						<i class="glyphicon glyphicon-pencil icon-pad edit-icon" ng-click="editCard($parent.$index,$index)"></i>&nbsp;<i class="glyphicon glyphicon-trash icon-pad delete-icon" ng-click="deleteCard($parent.$index,$index)"></i>
 					</div>
@@ -118,7 +118,7 @@
 			</div>
 
 			<div class="card-add " ng-hide="addCardIndex[$index]" onclick="scrollBot($index)">
-				<button type="submit" class="btn btn-primary" ng-click="addCard($index,newCardContent[$index]);">
+				<button type="submit" class="btn btn-success" ng-click="addCard($index,newCardContent[$index]);">
   				<i class="glyphicon glyphicon-plus"></i> Add
 				</button>
 				<button class="btn btn-primary" ng-click="cancelAdd($index)">
@@ -135,7 +135,7 @@
 			</div>
 		</div>
 		<div class="list-holder">
-			<div class="list add-list">
+			<div class="add-list">
 			<div class="card-title" ng-show="newListBool">
 			<button type="submit" class="btn btn-primary add-list-button" ng-click="addNewListUI()">
   			<i class="glyphicon glyphicon-plus"></i> New List
