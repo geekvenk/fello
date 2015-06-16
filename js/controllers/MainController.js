@@ -1,7 +1,7 @@
 app.controller('MainController', ['$scope', function($scope) { 
   $scope.title = "Venkatesh's board";
   $scope.lists = JSON.parse(localStorage.getItem("lists"));
-    var i,ii,tempList;$scope.newList='';$scope.newListBool=true;$scope.newCardContent=new Array();$scope.addCardIndex=new Array();$scope.editCardContent=new Array();$scope.editCardIndex=new Array();$scope.editList=new Array();$scope.editListIndex=new Array();$scope.cardTitleHover=new Array();$scope.editListContent=new Array();$scope.cardHover=new Array();$scope.sortableOptionsList=new Array();
+    var i,ii,tempList;$scope.newList='';$scope.newListBool=true;$scope.prevCardEdit=false;$scope.newCardContent=new Array();$scope.addCardIndex=new Array();$scope.editCardContent=new Array();$scope.editCardIndex=new Array();$scope.editList=new Array();$scope.editListIndex=new Array();$scope.cardTitleHover=new Array();$scope.editListContent=new Array();$scope.cardHover=new Array();$scope.sortableOptionsList=new Array();$scope.prevEditCardId=new Array();
 
     $scope.initiate=function(){
       i=0;
@@ -38,6 +38,11 @@ app.controller('MainController', ['$scope', function($scope) {
 
 
     $scope.editCard = function(parentIndex,index) {
+      if ($scope.prevCardEdit) {
+        $scope.editCardIndex[$scope.prevEditCardId[0]][$scope.prevEditCardId[1]]=true;
+      }
+      $scope.prevCardEdit=true;
+      $scope.prevEditCardId[0]=parentIndex;$scope.prevEditCardId[1]=index;
       $scope.editCardIndex[parentIndex][index]=false;
       $scope.cardHover[parentIndex][index]=true;
       var id="#editCardContent"+parentIndex+''+index;
@@ -50,6 +55,7 @@ app.controller('MainController', ['$scope', function($scope) {
 
     $scope.cancelEditCard = function(parentIndex,index) {
       $scope.editCardIndex[parentIndex][index]=true;
+      $scope.prevCardEdit=false;
     };
 
     $scope.saveCard = function(parentIndex,index) {
@@ -58,6 +64,7 @@ app.controller('MainController', ['$scope', function($scope) {
       console.log("Saved ->"+$scope.editCardContent);
       console.log("Hover Out card ->"+index);
       localStorage.setItem("lists", JSON.stringify($scope.lists));
+      $scope.prevCardEdit=false;
     };
 
     $scope.deleteCard = function(parentIndex,index) {
@@ -66,7 +73,7 @@ app.controller('MainController', ['$scope', function($scope) {
       localStorage.setItem("lists", JSON.stringify($scope.lists));
     };
 
-    $scope.addCardProcess = function(index) { 
+    $scope.addCardProcess = function(index) {
     $scope.addCardIndex[index]=false;
     console.log("Card adding...");
     };
