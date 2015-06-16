@@ -84,8 +84,12 @@
     }
   ];
 
-  if (typeof(Storage) != "undefined") {
-    localStorage.setItem("lists", JSON.stringify(iniList));
+  if ((typeof(Storage) != "undefined")) {
+    if (localStorage.getItem("lists")) {
+      console.log('lists exists. Fetching from localstorage...');
+    }else{
+      localStorage.setItem("lists", JSON.stringify(iniList));
+    }
 } else {
     alert("localStorage is not available!");
 }

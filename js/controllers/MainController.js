@@ -23,6 +23,7 @@ app.controller('MainController', ['$scope', function($scope) {
       });
       i++;
     });
+    localStorage.setItem("lists", JSON.stringify($scope.lists));
     };
 
     $scope.initiate();
@@ -233,15 +234,15 @@ app.controller('MainController', ['$scope', function($scope) {
           console.log("list " + _listName + ": sort");
       },
       start: function() {
-          console.log("list " + _listName + ": start");
+          console.log("list " + _listName + ": start");          
       },
       stop: function() {
           console.log("list " + _listName + ": stop");
-
       },
       update: function() {
           console.log("list " + _listName + ": update");
           $scope.initiate();
+          localStorage.setItem("lists", JSON.stringify($scope.lists));
       }
     };
     return options;
