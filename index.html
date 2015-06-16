@@ -85,7 +85,7 @@
 			</div>
 
 			<div class="cards-scrollable" id="{{list.id}}" ui-sortable="sortableOptionsList[$index]" ng-model="lists[$index].cards">
-			<div class="card card-{{list.id}}" ng-repeat="card in lists[$index].cards">
+			<div class="card card-{{list.id}}" ng-repeat="card in lists[$index].cards"  id="card{{$parent.$index}}{{$index}}">
 				<div class="card-content-holder" ng-mouseover="cardHover[$parent.$index][$index]=false" ng-mouseleave="cardHover[$parent.$index][$index]=true" ng-click="editCard($parent.$index,$index)">
 					<div class="card-options {{$parent.$index}}cardHover{{$index}}" ng-hide="cardHover[$parent.$index][$index]">
 						<i class="glyphicon glyphicon-pencil icon-pad edit-icon" ng-click="editCard($parent.$index,$index)"></i>&nbsp;<i class="glyphicon glyphicon-trash icon-pad delete-icon" ng-click="deleteCard($parent.$index,$index)"></i>
@@ -110,7 +110,7 @@
 			</div>
 
 			<div class="card card-{{list.id}}" id="card-{{list.id}}" ng-hide="addCardIndex[$index]">
-				<textarea type="text" ng-model="newCardContent[$index]" /></textarea>
+				<textarea type="text" ng-model="newCardContent[$index]" id="addCardContent{{$index}}" ng-change="onAddCardInput($index)"/></textarea>
 			</div>
 
 			

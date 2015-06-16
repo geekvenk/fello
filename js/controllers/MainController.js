@@ -5,7 +5,7 @@ app.controller('MainController', ['$scope', function($scope) {
 
     $scope.initiate=function(){
       i=0;
-    $scope.lists.forEach(function(list) {
+      $scope.lists.forEach(function(list) {
       $scope.addCardIndex[i]=true;
       $scope.editListIndex[i]=true;
       $scope.cardTitleHover[i]=true;
@@ -26,12 +26,22 @@ app.controller('MainController', ['$scope', function($scope) {
     };
 
     $scope.initiate();
+    
 
     $scope.onCardInput=function(parentIndex,index){
       var id="#editCardContent"+parentIndex+''+index;
       var idValueLength=$(id).val().length;
       console.log("Length ->"+idValueLength);
       var idNumLines=Math.round(idValueLength/35);idNumLines++;
+      var idHeight=idNumLines*25;
+      $(id).css('height',idHeight+"px");
+    };
+
+    $scope.onAddCardInput=function(index){
+      var id="#addCardContent"+index;
+      var idValueLength=$(id).val().length;
+      console.log("Length ->"+idValueLength);
+      var idNumLines=Math.round(idValueLength/35);idNumLines+=2;
       var idHeight=idNumLines*25;
       $(id).css('height',idHeight+"px");
     };
@@ -190,7 +200,7 @@ app.controller('MainController', ['$scope', function($scope) {
   function createOptions (listName) {
     var _listName = listName;
     var options = {
-      placeholder: "card",
+      placeholder: "tempcard",
       connectWith: ".cards-scrollable",
       activate: function() {
           console.log("list " + _listName + ": activate");
@@ -227,6 +237,7 @@ app.controller('MainController', ['$scope', function($scope) {
       },
       stop: function() {
           console.log("list " + _listName + ": stop");
+
       },
       update: function() {
           console.log("list " + _listName + ": update");

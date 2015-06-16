@@ -96,6 +96,15 @@ body{
   	overflow: hidden;
 }
 
+.tempcard{
+	width:260px;
+	height: 50px;
+	margin:5px 5px;
+	background-color: #B2B2B2;
+	border-radius: 3px;
+	border-bottom: 1px solid #CDCCCC;
+}
+
 /*
 .card-content:hover{
 	opacity: 0.6;
